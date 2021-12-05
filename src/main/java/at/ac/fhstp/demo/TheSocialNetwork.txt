@@ -1,0 +1,21 @@
+package at.ac.fhstp.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+//Das Soziale Netzwerk
+public class TheSocialNetwork {
+    // private SnifferManager sniffmanager;
+
+    @Autowired
+    private PupdateRepository repository;
+
+    public List<PupdateEntity> getTimeline(int UserID) {
+        Sniffer sniffer = new Sniffer();
+
+        return null;
+
+    }
+
+}
