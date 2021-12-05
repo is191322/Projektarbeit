@@ -12,6 +12,4 @@ public abstract class Pupdate {
     private int UserID;
     private Date date;
     private int likecount;
-    private List<String> comments = new ArrayList<String>();
-
 }

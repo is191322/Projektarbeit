@@ -28,4 +28,8 @@ public class PupdateService {
         pupdateRepository.saveAll(pupdates);
     }
 
+    public void postPupdate(PupdateEntity pupdate) {
+        pupdateRepository.save(pupdate);
+    }
+
 }
