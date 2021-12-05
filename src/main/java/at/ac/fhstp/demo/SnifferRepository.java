@@ -3,7 +3,8 @@ package at.ac.fhstp.demo;
 import java.util.List;
 
 //Verwaltung aller Sniffer
-public class SnifferManager {
+//Singelton
+public class SnifferRepository {
     private List<Sniffer> allsniffers;
-    
+
 }
