@@ -73,7 +73,7 @@ public class PupdateController {
 
     }
 
-    // Beispielaufruf: http://localhost:8080/like/?pupdateid=1userid=6
+    // Beispielaufruf: http://localhost:8080/like/?pupdateID=1&userid=3
     @GetMapping("/like")
     public int like(
             @RequestParam(value = "pupdateID", defaultValue = "") String pupdateID,
