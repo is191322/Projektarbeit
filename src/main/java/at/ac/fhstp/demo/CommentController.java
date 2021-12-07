@@ -15,6 +15,7 @@ public class CommentController {
 
     @Autowired
     CommentService commentService;
+
     @Autowired
     PupdateRepository pupdateRepository;
 
@@ -27,7 +28,7 @@ public class CommentController {
     @GetMapping("/getComments")
     public List<CommentEntity> getComments(@RequestParam(value = "pupdateID", defaultValue = "") Integer pupdateID) {
 
-        if (!(new PupdateService(pupdateRepository).existsByID(pupdateID))) {
+        if (!(new PupdateService().existsByID(pupdateID))) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "PupdateID wurde konnte nicht gefunden werden!");
         }
         List<CommentEntity> comments = commentService.fetchComments(pupdateID);

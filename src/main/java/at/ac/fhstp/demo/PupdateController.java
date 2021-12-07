@@ -3,18 +3,15 @@ package at.ac.fhstp.demo;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PupdateController {
-
-    final PupdateService pupdateService;
-
-    public PupdateController(PupdateService pupdateService) {
-        this.pupdateService = pupdateService;
-    }
+    @Autowired
+    PupdateService pupdateService;
 
     // Beispielaufruf: http://localhost:8080/getPupdates
     @GetMapping("/getPupdates")
