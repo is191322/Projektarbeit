@@ -1,0 +1,9 @@
+Ein Sniffer kann einem anderen Sniffer folgen:
+-> SnifferEntity    -> FollowerEntity
+        id      FollowingSnifferID    FollowsSnifferID  
+
+Jeder Sniffer kann Pupdates mehrmals Kommentieren:
+
+Comment <- Sniffer  
+        <- Pupdates 
+

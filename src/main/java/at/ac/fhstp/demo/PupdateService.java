@@ -29,7 +29,7 @@ public class PupdateService {
         pupdateRepository.saveAll(pupdates);
     }
 
-    public void postPupdate(PupdateEntity pupdate) {
+    public void savePupdate(PupdateEntity pupdate) {
         pupdateRepository.save(pupdate);
     }
 
@@ -42,6 +42,10 @@ public class PupdateService {
 
         pupdateRepository.save(pupdate.get().like());
         return pupdate.get().getLikecount();
+    }
+
+    public boolean existsByID(int id) {
+        return pupdateRepository.existsById(id);
     }
 
 }

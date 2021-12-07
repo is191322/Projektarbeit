@@ -42,4 +42,8 @@ public class SnifferService {
 
     }
 
+    public boolean existsByID(int id) {
+        return snifferRepository.existsById(id);
+    }
+
 }

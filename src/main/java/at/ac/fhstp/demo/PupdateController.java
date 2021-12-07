@@ -38,7 +38,7 @@ public class PupdateController {
                 .setText(pupdateString)
                 .setUserID(Integer.parseInt(UserID));
 
-        pupdateService.postPupdate(pupdate);
+        pupdateService.savePupdate(pupdate);
         return pupdateString;
     }
 
@@ -46,11 +46,11 @@ public class PupdateController {
     // http://localhost:8080/postPicture/?pupdateString=Schau,%20mein%20Hund%20frisst%20die%20Nachbarskatze&userid=5&picturename=cool.jpg&picturesizex=800&picturesizey=600
     @GetMapping("/postPicture")
     public String postPicture(
-            @RequestParam(value = "pupdateString", defaultValue = "") String pupdateString,
-            @RequestParam(value = "userid", defaultValue = "") String UserID,
-            @RequestParam(value = "picturename", defaultValue = "") String picturename,
-            @RequestParam(value = "picturesizex", defaultValue = "") String picturesizex,
-            @RequestParam(value = "picturesizey", defaultValue = "") String picturesizey) {
+            @RequestParam(value = "pupdateString", required = true, defaultValue = "") String pupdateString,
+            @RequestParam(value = "userid", required = true, defaultValue = "") Integer UserID,
+            @RequestParam(value = "picturename", required = true, defaultValue = "") String picturename,
+            @RequestParam(value = "picturesizex", required = true, defaultValue = "") Integer picturesizex,
+            @RequestParam(value = "picturesizey", required = true, defaultValue = "") Integer picturesizey) {
         // int id, int OriginPupdateID, int OriginUserID, int UserID, Date date, int
         // likecount
         // Todo: String irgendwie speichern, User erweitern,...
@@ -60,12 +60,12 @@ public class PupdateController {
 
                     .setDate(new Date())
                     .setText(pupdateString)
-                    .setUserID(Integer.parseInt(UserID))
+                    .setUserID(UserID)
                     .setPictureName(picturename)
-                    .setPictureSizeX(Integer.parseInt(picturesizex))
-                    .setPictureSizeY(Integer.parseInt(picturesizey));
+                    .setPictureSizeX(picturesizex)
+                    .setPictureSizeY(picturesizey);
 
-            pupdateService.postPupdate(pupdate);
+            pupdateService.savePupdate(pupdate);
             return pupdateString;
         } catch (Exception ex) {
             return ex.getMessage();
