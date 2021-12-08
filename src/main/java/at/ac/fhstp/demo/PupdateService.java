@@ -1,5 +1,6 @@
 package at.ac.fhstp.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,15 @@ public class PupdateService {
 
     public List<PupdateEntity> fetchPupdates() {
         return pupdateRepository.findAll();
+    }
+
+    public List<PupdateEntity> fetchTimeline(int SnifferID) {
+
+        // Step1 Hole alle eigenen Pupdates
+        // Step2 Hole alle Pupdates von Followern
+        // step3 Sortieren nach Datum
+        return new ArrayList<PupdateEntity>();
+
     }
 
     public void savePupdate(PupdateEntity pupdate) {
