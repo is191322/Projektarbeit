@@ -17,12 +17,8 @@ public class Initializer {
     @Autowired
     PupdateService pupdateService;
 
-    public void init() {
-
-    }
-
     @EventListener(ApplicationReadyEvent.class)
-    public void doSomethingAfterStartup() {
+    public void init() {
         initSniffers();
         initPupdates();
     }
@@ -46,9 +42,16 @@ public class Initializer {
 
     private void initPupdates() {
         System.out.println("Initialisiere Pupdates");
-
+        pupdateService.savePupdate(new PupdateEntity(0, 0, 0, 1, new Date(), 5,
+                "Junu, mein Hund frisst die Nachbarskatze", "is191325.jpg", 800, 600));
         pupdateService.savePupdate(
-                new PupdateEntity(0, 0, 0, 1, new Date(), 5, "Junu, mein Hund frisst die Nachbarskatze", "", 0, 0));
+                new PupdateEntity(0, 0, 0, 3, new Date(), 5, "Mein Hund hat Flöhe", "Fiffy.jpg", 800, 600));
+        pupdateService.savePupdate(new PupdateEntity(0, 1, 1, 2, new Date(), 5,
+                "Junu, mein Hund frisst die Nachbarskatze", "is191325.jpg", 800, 600));
+        pupdateService.savePupdate(new PupdateEntity(0, 0, 0, 1, new Date(), 5,
+                "Die Nachbarskatze hat meinen Hund gefressen!", "is191325.jpg", 800, 600));
+        pupdateService.savePupdate(new PupdateEntity(0, 0, 0, 3, new Date(), 5,
+                "Waschen hilft nicht, er hat immer noch Flöhe", "cool.jpg", 800, 600));
     }
 
 }
