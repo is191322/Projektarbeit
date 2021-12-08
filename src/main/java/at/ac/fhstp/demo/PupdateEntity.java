@@ -6,10 +6,16 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Table(name = "pupdates")
 @Entity
+// @NamedNativeQueries(value = {
+// @NamedNativeQuery(name = "PupdateEntity.getTimeline", query = "SELECT * FROM
+// pupdates WHERE UserID = ?1 OR ", resultClass = CommentEntity.class) })
+
 public class PupdateEntity {
 
     @Id
