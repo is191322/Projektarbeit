@@ -13,16 +13,9 @@ public class PupdateService {
     PupdateRepository pupdateRepository;
 
     public List<PupdateEntity> fetchPupdates() {
-        List<PupdateEntity> pupdates = new ArrayList<>();
 
-        Iterable<PupdateEntity> all = pupdateRepository.findAll();
-        all.forEach(pupdates::add);
+        return pupdateRepository.findAll();
 
-        return pupdates;
-    }
-
-    public void savePupdates(List<PupdateEntity> pupdates) {
-        pupdateRepository.saveAll(pupdates);
     }
 
     public void savePupdate(PupdateEntity pupdate) {
@@ -34,10 +27,10 @@ public class PupdateService {
         if (pupdate.isEmpty())
             return -1;
 
-        // Todo: Merken, dass der User nicht 2x Liken darf
-
-        pupdateRepository.save(pupdate.get().like());
-        return pupdate.get().getLikecount();
+        PupdateEntity p = pupdate.get();
+        p.setLikecount(p.getLikecount() + 1);
+        pupdateRepository.save(pupdate.get());
+        return p.getLikecount();
     }
 
     public boolean existsByID(int id) {

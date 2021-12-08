@@ -1,10 +1,10 @@
 package at.ac.fhstp.demo;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 //Verwaltet alle Pupdates
 //Singelton
-public interface PupdateRepository extends CrudRepository<PupdateEntity, Integer> {
+public interface PupdateRepository extends JpaRepository<PupdateEntity, Integer> {
 
     // private List<Pupdate> pupdates;
 

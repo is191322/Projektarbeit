@@ -21,19 +21,15 @@ public class PupdateController {
     }
 
     // Beispielaufruf: http://localhost:8080/post?pupdateString=abc&userid=3
-    // Todo: String irgendwie speichern, User erweitern,...
     @GetMapping("/post")
     public String postPupdate(
-            @RequestParam(value = "pupdateString", defaultValue = "") String pupdateString,
-            @RequestParam(value = "userid", defaultValue = "") String UserID) {
-        // int id, int OriginPupdateID, int OriginUserID, int UserID, Date date, int
-        // likecount
+            @RequestParam(value = "pupdateString", required = true, defaultValue = "") String pupdateString,
+            @RequestParam(value = "userid", required = true, defaultValue = "-1") Integer UserID) {
 
         PupdateEntity pupdate = new PupdateEntity()
-
-                .setDate(new Date())
-                .setText(pupdateString)
-                .setUserID(Integer.parseInt(UserID));
+                .date(new Date())
+                .Text(pupdateString)
+                .UserID(UserID);
 
         pupdateService.savePupdate(pupdate);
         return pupdateString;
@@ -55,12 +51,12 @@ public class PupdateController {
 
             PupdateEntity pupdate = new PupdateEntity()
 
-                    .setDate(new Date())
-                    .setText(pupdateString)
-                    .setUserID(UserID)
-                    .setPictureName(picturename)
-                    .setPictureSizeX(picturesizex)
-                    .setPictureSizeY(picturesizey);
+                    .date(new Date())
+                    .Text(pupdateString)
+                    .UserID(UserID)
+                    .PictureName(picturename)
+                    .PictureSizeX(picturesizex)
+                    .PictureSizeY(picturesizey);
 
             pupdateService.savePupdate(pupdate);
             return pupdateString;
@@ -73,13 +69,13 @@ public class PupdateController {
     // Beispielaufruf: http://localhost:8080/like/?pupdateID=1&userid=3
     @GetMapping("/like")
     public int like(
-            @RequestParam(value = "pupdateID", defaultValue = "") String pupdateID,
-            @RequestParam(value = "userid", defaultValue = "") String userid) {
+            @RequestParam(value = "pupdateID", required = true, defaultValue = "-1") Integer pupdateID,
+            @RequestParam(value = "userid", required = true, defaultValue = "-1") Integer userid) {
         // int id, int OriginPupdateID, int OriginUserID, int UserID, Date date, int
         // likecount
         // Todo: String irgendwie speichern, User erweitern,...
 
-        return pupdateService.likePupdate(Integer.parseInt(pupdateID), Integer.parseInt(userid));
+        return pupdateService.likePupdate(pupdateID, userid);
     }
 
 }
