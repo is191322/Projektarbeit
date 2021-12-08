@@ -12,9 +12,7 @@ public class PupdateService {
     PupdateRepository pupdateRepository;
 
     public List<PupdateEntity> fetchPupdates() {
-
         return pupdateRepository.findAll();
-
     }
 
     public void savePupdate(PupdateEntity pupdate) {
