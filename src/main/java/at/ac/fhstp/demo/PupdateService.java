@@ -39,7 +39,9 @@ public class PupdateService {
         pupdateRepository.save(pupdate.get());
         return p.getLikecount();
     }
-
+    public PupdateEntity getPupdatebyID(int id){
+        return pupdateRepository.findById(id).get();
+    }
     public boolean existsByID(int id) {
         return pupdateRepository.existsById(id);
     }

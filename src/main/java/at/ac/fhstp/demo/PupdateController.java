@@ -35,6 +35,27 @@ public class PupdateController {
         return pupdateString;
     }
 
+    // http://localhost:8080/share?pupdateID=7&userid=2
+    @GetMapping("/share")
+    public String sharePupdate(
+            @RequestParam(value = "pupdateID", required = true, defaultValue = "") Integer pupdateID,
+            @RequestParam(value = "userid", required = true, defaultValue = "") Integer UserID) {    
+        PupdateEntity pupdate =pupdateService.getPupdatebyID(pupdateID);
+        PupdateEntity sharedpupdate=new PupdateEntity()
+        .date(new Date())
+        .PictureName(pupdate.getPictureName())
+        .PictureSizeX(pupdate.getPictureSizeX())
+        .PictureSizeY(pupdate.getPictureSizeY())
+        .Text(pupdate.getText())
+        .OriginPupdateID(pupdate.getId())
+        .OriginUserID(pupdate.getUserID())
+        .UserID(UserID)
+        .likecount(0);
+        pupdateService.savePupdate(sharedpupdate);
+        return "Pupdate geteilt";
+       
+    }
+
     // Todo: Ändern auf Postmapping nach tests
     // http://localhost:8080/postPicture/?pupdateString=Schau,%20mein%20Hund%20frisst%20die%20Nachbarskatze&userid=5&picturename=cool.jpg&picturesizex=800&picturesizey=600
     @GetMapping("/postPicture")
