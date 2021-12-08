@@ -1,6 +1,5 @@
 package at.ac.fhstp.demo;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +16,13 @@ public class CommentController {
     CommentService commentService;
 
     @Autowired
-    PupdateRepository pupdateRepository;
-
-    // public CommentController(CommentService commentService) {
-    // this.commentService = commentService;
-    // this.pupdateRepository = pupdateRepository;
-    // }
+    PupdateService pupdateService;
 
     // Beispielaufruf: http://localhost:8080/getComments?pupdateID=1
     @GetMapping("/getComments")
     public List<CommentEntity> getComments(@RequestParam(value = "pupdateID", defaultValue = "") Integer pupdateID) {
 
-        if (!(new PupdateService().existsByID(pupdateID))) {
+        if (!(pupdateService.existsByID(pupdateID))) {
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "PupdateID wurde konnte nicht gefunden werden!");
         }
         List<CommentEntity> comments = commentService.fetchComments(pupdateID);
@@ -43,18 +37,8 @@ public class CommentController {
             @RequestParam(value = "pupdateID", required = true, defaultValue = "0") Integer pupdateID,
             @RequestParam(value = "snifferID", required = true, defaultValue = "0") Integer snifferID,
             @RequestParam(value = "commentString", defaultValue = "") String commentString) {
-        // int id, int OriginCommentID, int OriginUserID, int UserID, Date date, int
-        // likecount
 
-        CommentEntity comment = new CommentEntity()
-
-                .date(new Date())
-                .comment(commentString)
-                .snifferID(snifferID)
-                .pupdateID(pupdateID);
-
-        commentService.saveComment(comment);
-
+        commentService.comment(snifferID, pupdateID, commentString);
         return commentString;
     }
 
