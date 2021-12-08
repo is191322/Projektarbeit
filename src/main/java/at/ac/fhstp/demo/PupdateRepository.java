@@ -1,11 +1,13 @@
 package at.ac.fhstp.demo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 //Verwaltet alle Pupdates
 //Singelton
 public interface PupdateRepository extends JpaRepository<PupdateEntity, Integer> {
-
+    List<PupdateEntity> findPupdatesbySniffer(int snifferID);
     // private List<Pupdate> pupdates;
 
     // public void AddPupdate(PupdateEntity pupdate);

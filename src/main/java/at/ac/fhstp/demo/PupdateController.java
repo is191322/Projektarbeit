@@ -98,5 +98,13 @@ public class PupdateController {
 
         return pupdateService.likePupdate(pupdateID, userid);
     }
+    // http://localhost:8080/getTimeline?userid=1
+    @GetMapping("/getTimeline")
+    public List<PupdateEntity> getTimeline(
+            @RequestParam(value = "userid", required = true, defaultValue = "") Integer UserID) {
+                return pupdateService.fetchTimeline(UserID);
+                
+            }
+
 
 }

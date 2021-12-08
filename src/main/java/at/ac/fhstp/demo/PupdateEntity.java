@@ -12,6 +12,9 @@ import javax.persistence.Table;
 
 @Table(name = "pupdates")
 @Entity
+@NamedNativeQueries(value= {
+    @NamedNativeQuery(name="PupdateEntity.findPupdatesbySniffer", query ="SELECT * FROM pupdates WHERE userID = ?1", resultClass = PupdateEntity.class)})
+
 // @NamedNativeQueries(value = {
 // @NamedNativeQuery(name = "PupdateEntity.getTimeline", query = "SELECT * FROM
 // pupdates WHERE UserID = ?1 OR ", resultClass = CommentEntity.class) })

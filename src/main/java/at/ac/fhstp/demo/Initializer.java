@@ -17,10 +17,13 @@ public class Initializer {
     @Autowired
     PupdateService pupdateService;
 
+    @Autowired
+    FollowerService followerService;
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
         initSniffers();
         initPupdates();
+        initFollower();
     }
 
     private void initSniffers() {
@@ -52,6 +55,17 @@ public class Initializer {
                 "Die Nachbarskatze hat meinen Hund gefressen!", "is191325.jpg", 800, 600));
         pupdateService.savePupdate(new PupdateEntity(0, 0, 0, 3, new Date(), 5,
                 "Waschen hilft nicht, er hat immer noch Flöhe", "cool.jpg", 800, 600));
+    }
+
+    private void initFollower() {
+        System.out.println("Initialisiere Follower");
+
+        List<FollowerEntity> follower = new ArrayList<>();
+
+        follower.add(new FollowerEntity(0, 1, 3, new Date()));
+        follower.add(new FollowerEntity(0, 3, 2, new Date()));
+        followerService.savefollowers(follower);
+
     }
 
 }
