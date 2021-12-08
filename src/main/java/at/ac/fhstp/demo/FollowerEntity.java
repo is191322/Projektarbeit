@@ -6,10 +6,15 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Table(name = "Follower")
 @Entity
+@NamedNativeQueries(value= {
+    @NamedNativeQuery(name="FollowerEntity.findFollowerstoSniffer", query ="SELECT * FROM Follower WHERE Following_SnifferID = ?1", resultClass = FollowerEntity.class)})
+
 public class FollowerEntity {
     @Id
     @GeneratedValue
