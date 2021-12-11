@@ -5,7 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,7 +37,7 @@ public class CommentController {
     // http://localhost:8080/comment?pupdateID=1&snifferID=1&commentString=test123
     // Todo: String irgendwie speichern, User erweitern,...
     @GetMapping("/comment")
-    public String postComment(
+    public String CommentByGetMapping(
             @RequestParam(value = "pupdateID", required = true, defaultValue = "0") Integer pupdateID,
             @RequestParam(value = "snifferID", required = true, defaultValue = "0") Integer snifferID,
             @RequestParam(value = "commentString", defaultValue = "") String commentString) {
@@ -42,4 +46,15 @@ public class CommentController {
         return commentString;
     }
 
+    // Beispiel mit Postmapping
+    /*
+     * @PostMapping("/commentbyPostMapping")
+     * public CommentEntity CommentByPostMapping(@RequestBody CommentEntity comment)
+     * {
+     * 
+     * commentService.comment(comment.getsnifferID(), comment.getPupdateID(),
+     * comment.getComment());
+     * return comment;
+     * }
+     */
 }
