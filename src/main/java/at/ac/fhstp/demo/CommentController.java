@@ -7,12 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+@ResponseBody
 @RestController
 public class CommentController {
 
@@ -47,14 +47,15 @@ public class CommentController {
     }
 
     // Beispiel mit Postmapping
-    /*
-     * @PostMapping("/commentbyPostMapping")
-     * public CommentEntity CommentByPostMapping(@RequestBody CommentEntity comment)
-     * {
-     * 
-     * commentService.comment(comment.getsnifferID(), comment.getPupdateID(),
-     * comment.getComment());
-     * return comment;
-     * }
-     */
+    // Request Body:
+    // {"id":14,"pupdateID":7,"snifferID":1,"date":"2021-12-11T16:13:43.082+00:00","comment":"test123"}
+    // Type Raw/JSON
+    @PostMapping("/commentbyPostMapping")
+    public CommentEntity CommentByPostMapping(@RequestBody CommentEntity comment) {
+
+        commentService.comment(comment.getsnifferID(), comment.getPupdateID(),
+                comment.getComment());
+        return comment;
+    }
+
 }
