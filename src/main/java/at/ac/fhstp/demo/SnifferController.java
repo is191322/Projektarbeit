@@ -12,7 +12,7 @@ public class SnifferController {
     @Autowired
     SnifferService snifferService;
 
-    // TODO: Für Security nicht gut, wenn einfach alle User abgefragt werden können!
+    //  Für Security nicht gut, wenn einfach alle User abgefragt werden können!
     // Beispielaufruf: http://localhost:8080/getSniffers
     @GetMapping("/getSniffers")
     public List<SnifferEntity> getSniffers() {

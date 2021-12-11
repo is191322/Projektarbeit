@@ -44,7 +44,8 @@ class DemoApplicationTests {
 		assertNotNull(pupdate);
 		List<PupdateEntity> pupdates =pupdateRepository.findPupdatesbySniffer(1);
 		assertNotNull(pupdates);
-		
+	}
+	@Test	
 	public void testSaveSniffers() {
 		assertNotNull(pupdate);
 
