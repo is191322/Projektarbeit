@@ -19,25 +19,26 @@ public class SnifferController {
         List<SnifferEntity> sniffers = snifferService.fetchSniffers();
         return sniffers;
     }
-    //http://localhost:8080/createSniffer?Name=Christopher Fritz&username=is191322
+
+    // http://localhost:8080/createSniffer?Name=Christopher Fritz&username=is191322
     @GetMapping("/createSniffer")
     public String createSniffer(
-        @RequestParam(value="Name",required = true,defaultValue = "") String name,
-        @RequestParam(value="username",required = true,defaultValue = "") String username){
-            SnifferEntity sniffer= new SnifferEntity()
-            .name(name)
-            .username(username);
+            @RequestParam(value = "Name", required = true, defaultValue = "") String name,
+            @RequestParam(value = "username", required = true, defaultValue = "") String username) {
+        SnifferEntity sniffer = new SnifferEntity()
+                .name(name)
+                .username(username);
 
-            snifferService.postsniffer(sniffer);
-            return "User: "+username+" erfolgreich angelegt";
-        }
-    //http://localhost:8080/getSnifferByID?ID=1
+        snifferService.postsniffer(sniffer);
+        return "User: " + username + " erfolgreich angelegt";
+    }
+
+    // http://localhost:8080/getSnifferByID?ID=1
     @GetMapping("/getSnifferByID")
     public SnifferEntity getSnifferByID(
-        @RequestParam(value="ID",defaultValue = "") int snifferID){
-            SnifferEntity sniffer = snifferService.getSniffer(snifferID);
-            return sniffer;
-        }
-    
+            @RequestParam(value = "ID", defaultValue = "") int snifferID) {
+        SnifferEntity sniffer = snifferService.getSniffer(snifferID);
+        return sniffer;
+    }
 
 }
