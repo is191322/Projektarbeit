@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -25,11 +26,12 @@ class DemoApplicationTests {
 	
 
 	@Test
-	public void testSaveSniffers(){
+	public void TestFetchPupdates(){
 		assertNotNull(pupdate);
-		
 		List<PupdateEntity> pupdates =pupdateRepository.findPupdatesbySniffer(1);
 		assertNotNull(pupdates);
+		
 	}
 
 }
+ 
