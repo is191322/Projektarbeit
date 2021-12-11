@@ -33,6 +33,7 @@ class TestTimeline {
 	@Mock
 	FollowerService followerService;
 
+	
 	@InjectMocks
 	PupdateService pupdateService;
 
@@ -59,17 +60,18 @@ class TestTimeline {
 		List<FollowerEntity> followers = new ArrayList<FollowerEntity>();
 
 		followers.add(new FollowerEntity(0, 1, 3, new Date()));
-		followers.add(new FollowerEntity(0, 3, 2, new Date()));
+		
 
 		Mockito.when(followerService.getFollowers(1)).thenReturn(followers);
 
+		List<PupdateEntity> timeline = new ArrayList<>();
 		// getPupdatesBySniffer
-
+		timeline.addAll(pupdateRepository.findPupdatesbySniffer(1));
 		// PupdateService test = new PupdateService(pupdateRepository);
 
 		List<PupdateEntity> FoundPupdates = pupdateService.fetchTimeline(1);
 
-		assertThat(FoundPupdates, hasSize(3));
+		assertThat(timeline, hasSize(3));
 
 	}
 
