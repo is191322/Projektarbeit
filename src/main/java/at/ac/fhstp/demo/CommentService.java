@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class CommentService {
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
     PupdateRepository pupdateRepository;
 
     // Kommentiert einen Post
