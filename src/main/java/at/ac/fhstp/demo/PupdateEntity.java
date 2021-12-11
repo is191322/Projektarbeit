@@ -1,14 +1,24 @@
 package at.ac.fhstp.demo;
 
 import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Table(name = "pupdates")
 @Entity
+@NamedNativeQueries(value= {
+    @NamedNativeQuery(name="PupdateEntity.findPupdatesbySniffer", query ="SELECT * FROM pupdates WHERE userID = ?1", resultClass = PupdateEntity.class)})
+
+// @NamedNativeQueries(value = {
+// @NamedNativeQuery(name = "PupdateEntity.getTimeline", query = "SELECT * FROM
+// pupdates WHERE UserID = ?1 OR ", resultClass = CommentEntity.class) })
+
 public class PupdateEntity {
 
     @Id
@@ -40,105 +50,173 @@ public class PupdateEntity {
     }
 
     public PupdateEntity() {
-
     }
 
     public int getId() {
         return this.id;
     }
 
-    public PupdateEntity setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
     public int getOriginPupdateID() {
         return this.OriginPupdateID;
     }
 
-    public PupdateEntity setOriginPupdateID(int OriginPupdateID) {
+    public void setOriginPupdateID(int OriginPupdateID) {
         this.OriginPupdateID = OriginPupdateID;
-        return this;
     }
 
     public int getOriginUserID() {
         return this.OriginUserID;
     }
 
-    public PupdateEntity setOriginUserID(int OriginUserID) {
+    public void setOriginUserID(int OriginUserID) {
         this.OriginUserID = OriginUserID;
-        return this;
     }
 
     public int getUserID() {
         return this.UserID;
     }
 
-    public PupdateEntity setUserID(int UserID) {
+    public void setUserID(int UserID) {
         this.UserID = UserID;
-        return this;
     }
 
     public Date getDate() {
         return this.date;
     }
 
-    public PupdateEntity setDate(Date date) {
+    public void setDate(Date date) {
         this.date = date;
-        return this;
     }
 
     public int getLikecount() {
         return this.likecount;
     }
 
-    public PupdateEntity setLikecount(int likecount) {
+    public void setLikecount(int likecount) {
         this.likecount = likecount;
-        return this;
     }
 
     public String getText() {
         return this.Text;
     }
 
-    public PupdateEntity setText(String Text) {
+    public void setText(String Text) {
         this.Text = Text;
-        return this;
     }
 
     public String getPictureName() {
         return this.PictureName;
     }
 
-    public PupdateEntity setPictureName(String PictureName) {
+    public void setPictureName(String PictureName) {
         this.PictureName = PictureName;
-        return this;
-
     }
 
     public int getPictureSizeX() {
         return this.PictureSizeX;
     }
 
-    public PupdateEntity setPictureSizeX(int PictureSizeX) {
+    public void setPictureSizeX(int PictureSizeX) {
         this.PictureSizeX = PictureSizeX;
-        return this;
-
     }
 
     public int getPictureSizeY() {
         return this.PictureSizeY;
     }
 
-    public PupdateEntity setPictureSizeY(int PictureSizeY) {
+    public void setPictureSizeY(int PictureSizeY) {
         this.PictureSizeY = PictureSizeY;
-        return this;
-
     }
 
-    public PupdateEntity like() {
-        this.likecount += 1;
+    public PupdateEntity id(int id) {
+        setId(id);
         return this;
+    }
+
+    public PupdateEntity OriginPupdateID(int OriginPupdateID) {
+        setOriginPupdateID(OriginPupdateID);
+        return this;
+    }
+
+    public PupdateEntity OriginUserID(int OriginUserID) {
+        setOriginUserID(OriginUserID);
+        return this;
+    }
+
+    public PupdateEntity UserID(int UserID) {
+        setUserID(UserID);
+        return this;
+    }
+
+    public PupdateEntity date(Date date) {
+        setDate(date);
+        return this;
+    }
+
+    public PupdateEntity likecount(int likecount) {
+        setLikecount(likecount);
+        return this;
+    }
+
+    public PupdateEntity Text(String Text) {
+        setText(Text);
+        return this;
+    }
+
+    public PupdateEntity PictureName(String PictureName) {
+        setPictureName(PictureName);
+        return this;
+    }
+
+    public PupdateEntity PictureSizeX(int PictureSizeX) {
+        setPictureSizeX(PictureSizeX);
+        return this;
+    }
+
+    public PupdateEntity PictureSizeY(int PictureSizeY) {
+        setPictureSizeY(PictureSizeY);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof PupdateEntity)) {
+            return false;
+        }
+        PupdateEntity pupdateEntity = (PupdateEntity) o;
+        return id == pupdateEntity.id && OriginPupdateID == pupdateEntity.OriginPupdateID
+                && OriginUserID == pupdateEntity.OriginUserID && UserID == pupdateEntity.UserID
+                && Objects.equals(date, pupdateEntity.date) && likecount == pupdateEntity.likecount
+                && Objects.equals(Text, pupdateEntity.Text) && Objects.equals(PictureName, pupdateEntity.PictureName)
+                && PictureSizeX == pupdateEntity.PictureSizeX && PictureSizeY == pupdateEntity.PictureSizeY;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, OriginPupdateID, OriginUserID, UserID, date, likecount, Text, PictureName, PictureSizeX,
+                PictureSizeY);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", OriginPupdateID='" + getOriginPupdateID() + "'" +
+                ", OriginUserID='" + getOriginUserID() + "'" +
+                ", UserID='" + getUserID() + "'" +
+                ", date='" + getDate() + "'" +
+                ", likecount='" + getLikecount() + "'" +
+                ", Text='" + getText() + "'" +
+                ", PictureName='" + getPictureName() + "'" +
+                ", PictureSizeX='" + getPictureSizeX() + "'" +
+                ", PictureSizeY='" + getPictureSizeY() + "'" +
+                "}";
     }
 
 }

@@ -4,17 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SnifferService {
-
-    private final SnifferRepository snifferRepository;
-
-    public SnifferService(SnifferRepository snifferRepository) {
-        this.snifferRepository = snifferRepository;
-
-    }
+    @Autowired
+    private SnifferRepository snifferRepository;
 
     public List<SnifferEntity> fetchSniffers() {
         List<SnifferEntity> sniffers = new ArrayList<>();
@@ -40,6 +36,10 @@ public class SnifferService {
 
         return sniffer.get();
 
+    }
+
+    public boolean existsByID(int id) {
+        return snifferRepository.existsById(id);
     }
 
 }

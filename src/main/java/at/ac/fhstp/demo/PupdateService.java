@@ -1,35 +1,44 @@
 package at.ac.fhstp.demo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PupdateService {
-
-    private final PupdateRepository pupdateRepository;
-
-    public PupdateService(PupdateRepository pupdateRepository) {
-        this.pupdateRepository = pupdateRepository;
-
-    }
-
+    @Autowired
+    PupdateRepository pupdateRepository;
+    @Autowired
+    FollowerService followerService;
     public List<PupdateEntity> fetchPupdates() {
-        List<PupdateEntity> pupdates = new ArrayList<>();
-
-        Iterable<PupdateEntity> all = pupdateRepository.findAll();
-        all.forEach(pupdates::add);
-
-        return pupdates;
+        return pupdateRepository.findAll();
+    }
+    public List<PupdateEntity> getPupdatesBySniffer(int snifferID){
+        return pupdateRepository.findPupdatesbySniffer(snifferID);
     }
 
-    public void savePupdates(List<PupdateEntity> pupdates) {
-        pupdateRepository.saveAll(pupdates);
+    public List<PupdateEntity> fetchTimeline(int SnifferID) {
+        
+        // Step1 Hole alle eigenen Pupdates
+        List<PupdateEntity> timeline = new ArrayList<>();
+        timeline.addAll(getPupdatesBySniffer(SnifferID));
+        
+        // Step2 Hole alle Pupdates von Followern
+        List<FollowerEntity> followers=followerService.getFollowers(SnifferID);
+        for(FollowerEntity f:followers){
+            timeline.addAll(getPupdatesBySniffer(f.getFollowsSnifferID()));
+        }
+        // step3 Sortieren nach Datum
+        timeline.sort((PupdateEntity p1, PupdateEntity p2)->p1.getDate().compareTo(p2.getDate()));
+        return timeline;
+
     }
 
-    public void postPupdate(PupdateEntity pupdate) {
+    public void savePupdate(PupdateEntity pupdate) {
         pupdateRepository.save(pupdate);
     }
 
@@ -38,10 +47,16 @@ public class PupdateService {
         if (pupdate.isEmpty())
             return -1;
 
-        // Todo: Merken, dass der User nicht 2x Liken darf
-
-        pupdateRepository.save(pupdate.get().like());
-        return pupdate.get().getLikecount();
+        PupdateEntity p = pupdate.get();
+        p.setLikecount(p.getLikecount() + 1);
+        pupdateRepository.save(pupdate.get());
+        return p.getLikecount();
+    }
+    public PupdateEntity getPupdatebyID(int id){
+        return pupdateRepository.findById(id).get();
+    }
+    public boolean existsByID(int id) {
+        return pupdateRepository.existsById(id);
     }
 
 }
